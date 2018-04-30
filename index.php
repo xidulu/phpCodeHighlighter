@@ -27,9 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function highlight_code($source_code, $lang, $theme) {
-    $css = 'overflow:auto;width:auto;';
+    $css = "overflow:auto;width:auto;";
+    $divstyle = "border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;";
+    $style = "'" . $css . $divstyle . "'";
     $proc = proc_open(
-        'pygmentize -f html -O style='. $theme . ',noclasses=True,cssclass=\'\',cssstyles='.$css. ',startinline,tabsize=4,prestyles=\'margin: 0\' -l ' . $lang,
+        'pygmentize -f html -O style='. $theme . ',noclasses=True,cssclass=\'\',cssstyles='. $style . ',prestyles=\'margin: 0\' -l ' . $lang,
         [ [ 'pipe', 'r'], ['pipe', 'w']], $pipes
     );
     
